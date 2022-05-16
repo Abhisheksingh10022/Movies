@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import DefaultHoc from "./HOC/Default.Hoc";
+import HomePage from "./Pages/Home.pages";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import MovieHoc from "./HOC/MovieHoc";
+import MoviePage from "./Pages/MoviePage";
+import Plays from "./Pages/plays.page";
+import axios from "axios";
+
+//axios default settings
+
+axios.defaults.baseURL="https://api.themoviedb.org/3";
+axios.defaults.params={};
+axios.defaults.params["api_key"]=process.env.REACT_APP_API_KEY
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+  return(
+    <>
+    <DefaultHoc path="/" exact component={HomePage} />
+    <MovieHoc path="/movie/:id" exact component={MoviePage} />
+    <DefaultHoc path="/plays" exact component={Plays}/>
+    </>
+  )
 }
 
 export default App;
